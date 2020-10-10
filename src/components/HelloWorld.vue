@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <input type="text" v-model="mensaje" v-if="mostrar">
-    <button v-on:click.prevent="addUser">Enviar</button>
+    <button class="btn btn-primary" v-on:click.prevent="addUser">Enviar</button>
     <h2> {{ mensaje }} </h2>
     <ul v-for="(fruta, key) in lista" v-bind:key="key">
       <li>{{fruta}}</li>
