@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
     <input type="text" v-model="mensaje" v-if="mostrar">
     <button class="btn btn-primary" v-on:click.prevent="addUser">Enviar</button>
