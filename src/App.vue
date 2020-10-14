@@ -29,6 +29,7 @@ export default {
 
 #content {
   padding: 60px;
+  margin-top: 30px;
 }
 #nav a {
   font-weight: bold;
