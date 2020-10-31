@@ -10,6 +10,13 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import VueCurrencyFilter from "vue-currency-filter"
+Vue.use(VueCurrencyFilter, {
+  symbol            : "$",
+  thousandsSeparator: ".",
+  symbolPosition    : "front"
+})
+
 new Vue({
   router,
   store,
