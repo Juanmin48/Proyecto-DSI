@@ -1,9 +1,14 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Proyecto diseño"/> -->
     <Slider/>
-    <products-grid v-bind:products="items"/>
+    <div class="row">
+      <div class="col-12">
+        <products-grid v-bind:products="items"/>
+      </div>
+    </div>
+  
   </div>
 </template>
 
