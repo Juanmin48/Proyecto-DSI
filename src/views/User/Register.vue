@@ -1,9 +1,13 @@
 <template>
     <div class="container-fluid">
-        <h3 class="title">Registrar cuenta</h3>
-        <hr>
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <h3 class="title">Registrar cuenta</h3>
+                <hr>
+            </div>
+        </div>
         <form @subtmi-prevent="signUp" class="row">
-            <div class="col-12 pt-3 pb-5">
+            <div class="col-5 pt-3 pb-5 mx-auto">
                 <div class="form-group">
                     <input type="text" name="name" id="name" class="form-control" v-model="name" placeholder="Nombre">
                 </div>
@@ -28,7 +32,7 @@
                     <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control"
                         v-model="passwordConfirmation" placeholder="Confirmar contraseña">
                 </div>
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <button type="submit" class="btn btn-dark w-100">Aceptar</button>
             </div>
         </form>
     </div>
@@ -53,3 +57,8 @@ export default {
     },
 }
 </script>
+<style scoped>
+    .title{
+        margin-top: 20px;
+    }
+</style>

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <navbar/>
+    <SubNavbar/>
     <div id="content">
       <router-view />
     </div>
@@ -9,9 +10,11 @@
 
 <script>
 import Navbar from '@/components/essentials/Navbar.vue'
+import SubNavbar from '@/components/essentials/SubNavbar.vue'
 export default {
   components:{
-    Navbar
+    Navbar,
+    SubNavbar
   }
 }
 </script>
@@ -25,11 +28,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: rgb(249,243,243)
 }
 
 #content {
-  padding: 60px;
-  margin-top: 30px;
+  padding: 120px 0;
+  margin-top: 0px;
 }
 #nav a {
   font-weight: bold;
