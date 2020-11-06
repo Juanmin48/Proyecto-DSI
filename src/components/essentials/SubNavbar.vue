@@ -3,7 +3,7 @@
         <div class="container mx-auto">
             <div class="row mx-auto">
                 <div class="col-3">
-                    <router-link to="/" class="nav-link"><i class="fas fa-map-marker-alt"/><span class="opt"> Dirección de envio</span></router-link>
+                    <router-link to="/" class="nav-link"><i class="fas fa-map-marker-alt"/><span class="opt"> Dirección de envío</span></router-link>
                 </div>
                 <div class="col-3">
                     <router-link to="/" class="nav-link"><i class="fas fa-star"/><span class="opt"> Ofertas</span></router-link>
