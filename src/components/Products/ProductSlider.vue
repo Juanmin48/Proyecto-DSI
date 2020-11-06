@@ -4,15 +4,25 @@
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2017/05/237062-fallo-seguridad-procesadores-intel-que-permite-hackear-pc-apagado.jpg?itok=wjPSIPmx"
+                    <img class="d-block w-100" src="@/media/Slide1.jpg"
                         alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2018/02/285729-como-crear-ramdisk-convertir-memoria-disco-duro-ultrarrapido.jpg?itok=UuQQoC6F"
+                    <img class="d-block w-100" src="@/media/Slide2.jpg"
                         alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="@/media/Slide3.jpg"
+                        alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="@/media/Slide4.jpg"
+                        alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
