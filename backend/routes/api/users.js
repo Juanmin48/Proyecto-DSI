@@ -2,13 +2,13 @@ const router = require('express').Router();
 const Parse = require('parse/node')
 const user = new Parse.User();
 
-
-router.get('/login', function (req, res) {
+router.post('/login', function (req, res) {
   var user = Parse.User
     .logIn(req.body.email, req.body.password).then(function (user) {
       res.send(user)
     }).catch(function (error) {
       console.log("Error: " + error.code + " " + error.message);
+      res.send()
     });
 });
 

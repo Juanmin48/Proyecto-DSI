@@ -19,6 +19,9 @@ app.use(
 
 
 app.use('/api/users',require('./routes/api/users.js'));
+app.use('/api/items',require('./routes/api/items.js'));
+
+
 
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)
