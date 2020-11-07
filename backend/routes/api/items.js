@@ -6,11 +6,13 @@ const item = new items();
 const upload = multer();
 
 
-router.get('/:itemId', function (req, res) {
-    query = new Parse.Query(Items);
+router.get('/getItem/:itemId', function (req, res) {
+   
+    query = new Parse.Query(items);
     query.equalTo("objectId", req.params.itemId);
     query.first().then(function(item){
         if(item){
+            console.log(item)
            res.send(item)
         } else {
            res.send("Nothing found, please try again")
@@ -21,10 +23,9 @@ router.get('/:itemId', function (req, res) {
 });
 
 router.post('/add',upload.single('ItemImg'), function (req, res) {
-
+   
     const fileData = new Parse.File("ItemImg.png", [...req.file.buffer], "image/png");
     //console.log(fileData);
-    
     try{
         fileData.save().then(saved => {
 
@@ -45,7 +46,39 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
         console.error('error ' , error);
         res.send('error ' , error);
     }
-
   });
+
+  router.get('/GetItems/:category', function (req, res) {
+ 
+    query = new Parse.Query(items);
+    console.log(req.params.category)
+    query.equalTo("category", req.params.category);
+    query.greaterThan("Stock",0)
+    query.find().then(function(item){
+        if(item){
+            console.log(item)
+           res.send(item)
+        } else {
+           res.send("Nothing found, please try again")
+        }
+    }).catch(function(error){
+        res.send("Error: " + error.code + " " + error.message)   
+    });
+});
+
+router.get('/getAll/all', function (req, res) {
+    query = new Parse.Query(items);
+    query.greaterThan("Stock",0)
+    query.find().then(function(item){
+        if(item){
+            console.log(item)
+           res.send(item)
+        } else {
+           res.send("Nothing found, please try again")
+        }
+    }).catch(function(error){
+        res.send("Error: " + error.code + " " + error.message)   
+    });
+});
 
 module.exports = router;
