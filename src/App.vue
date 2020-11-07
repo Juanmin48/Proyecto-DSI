@@ -21,7 +21,9 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap%27');
-
+body{
+  background: rgb(249,243,243)
+}
 #app {
   font-family: Amaranth;
   -webkit-font-smoothing: antialiased;
