@@ -1,28 +1,30 @@
 const router = require('express').Router();
 const Parse = require('parse/node')
-const MyCustomClass = Parse.Object.extend('User');
-const myNewObject = new MyCustomClass();
+const user = new Parse.User();
 
 
-
-router.get('/', function(req, res) {
-   myNewObject.set('username', 'cuadradob');
-   myNewObject.set('password', '123456');
-   myNewObject.set('email', 'cuadradob@uninorte.edu.co');
-
-   myNewObject.save().then(
-   (result) => {
-    if (typeof document !== 'undefined') document.write(`ParseObject created: ${JSON.stringify(result)}`);
-    res.send('ParseObject created');
-   },
-   (error) => {
-    if (typeof document !== 'undefined') document.write(`Error while creating ParseObject: ${JSON.stringify(error)}`);
-    console.error('Error while creating ParseObject: ', error);
-    res.send(error.message)
-   }
- );
-
+router.get('/login', function (req, res) {
+  var user = Parse.User
+    .logIn(req.body.email, req.body.password).then(function (user) {
+      res.send(user)
+    }).catch(function (error) {
+      console.log("Error: " + error.code + " " + error.message);
+    });
 });
 
+router.post('/register', function(req, res) {
+  user.set('username', req.body.username);
+  user.set('name', req.body.name);
+  user.set('lastname', req.body.lastname);
+  user.set('telephone', req.body.cell);
+  user.set('email', req.body.email);
+  user.set('password', req.body.password);
+  
+  user.signUp().then(function(user) {
+    res.send('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"))
+}).catch(function(error){
+    res.send("Error: " + error.code + " " + error.message)
+});
+});
 
 module.exports = router;
