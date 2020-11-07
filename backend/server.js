@@ -1,4 +1,5 @@
 var express = require('express')
+var jwt = require('jsonwebtoken')
 var bodyParser = require('body-parser')
 var app = express()
 
