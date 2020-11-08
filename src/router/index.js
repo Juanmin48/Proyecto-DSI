@@ -6,6 +6,8 @@ import Login from '../views/User/Login.vue'
 import Register from '../views/User/Register.vue'
 import Product from '../views/Product.vue'
 import Sell from '../views/Sell.vue'
+import Store from '../store/index.js'
+import ProductList from '../components/Products/ProductList.vue'
 
 Vue.use(VueRouter)
 
@@ -40,20 +42,36 @@ const routes = [
     component: Register
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'Product',
     component: Product
   },
   {
     path: '/sell',
     name: 'Sell',
-    component: Sell
+    component: Sell,
+    meta: {authRequired: true}
+  },
+  {
+    path: '/product-list',
+    name: 'ProductList',
+    component: ProductList,
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const user = Store.state.user
+  const authRequired = to.matched.some(record => record.meta.authRequired)
+  if (!user && authRequired) {
+    return next("/Login")
+  } else {
+    next()
+  }
 })
 
 export default router

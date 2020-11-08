@@ -15,7 +15,7 @@
                 <!-- Image -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="Image" lang="es">
+                        <input type="file" class="custom-file-input" id="Image" lang="es" style="display:none;">
                         <label class="custom-file-label" for="Image" style="text-align:left; color:gray;">Seleccionar Imagen</label>
                     </div>
                 </div>
@@ -50,9 +50,9 @@
 export default {
     data() {
       return {
-        ProductName                : "",
-        Price            : "",
-        Quantity               : "",
+        ProductName         : "",
+        Price               : "",
+        Quantity            : "",
         password            : "",
         email               : "",
         passwordConfirmation: ""

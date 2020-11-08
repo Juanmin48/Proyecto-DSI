@@ -60,7 +60,8 @@ export default {
                     this.email = ""
                     this.password = ""
                     this.$store.dispatch("LOG_IN", user)
-                    this.$route.push({name: 'Home'})
+                    this.$store.dispatch("NOT_LOGGING")
+                    this.$router.replace({name: 'Home'})
                 }).catch((error) => console.log(error))
             }
         }

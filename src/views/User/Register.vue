@@ -91,7 +91,7 @@ export default {
                             this.password = ""
                             this.address = ""
                             alert('Usuario creado con éxito')
-                            this.$router.push({name: 'Login'})
+                            this.$router.replace({name: 'Login'})
                         }).catch((error) => {
                             alert('Error al crear el usuario', error.toString())
                         })
