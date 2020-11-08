@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <navbar/>
-    <SubNavbar/>
+    <navbar :is-authenticated="isAuthenticated" :is-logging="isLogging"/>
+    <SubNavbar :is-authenticated="isAuthenticated" :is-logging="isLogging"/>
     <div id="content">
       <router-view />
     </div>
@@ -15,7 +15,16 @@ export default {
   components:{
     Navbar,
     SubNavbar
-  }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.user != null
+    },
+
+    isLogging() {
+      return this.$store.state.logging
+    }
+  },
 }
 </script>
 

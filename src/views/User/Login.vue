@@ -28,7 +28,8 @@
         </div>
         <div class="row">
             <div class="col-5 mx-auto">
-                <router-link to="/register" id="reg" class="nav-link mx-auto btn btn-dark">Registrate</router-link>
+                <router-link to="/register" id="reg" class="nav-link mx-auto btn btn-dark">Regístrate
+                </router-link>
             </div>
         </div>
         
@@ -36,17 +37,36 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            go: null,
         }
     },
     methods: {
         login() {
-            console.log('Hola :D')
+            if(!this.email || this.email.toString().trim() === "" ||
+              !this.password || this.password.toString().trim() === "") {
+                  alert('Asegurese de rellenar todos los campos')
+            } else {
+                Axios.post('http://localhost:5000/api/users/login', {
+                    email: this.email,
+                    password: this.password
+                }).then((response) => {
+                    var user = response.data
+                    this.email = ""
+                    this.password = ""
+                    this.$store.dispatch("LOG_IN", user)
+                    this.$route.push({name: 'Home'})
+                }).catch((error) => console.log(error))
+            }
         }
+    },
+    created() {
+        this.$store.dispatch("IS_LOGGING")
     },
 }
 </script>

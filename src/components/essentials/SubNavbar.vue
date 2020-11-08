@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" v-if="!isLogging">
         <div class="container mx-auto">
             <div class="row mx-auto">
                 <div class="col-3">
@@ -18,6 +18,16 @@
         </div>
     </nav>
 </template>
+
+<script>
+export default {
+    props: {
+        isLogging: Boolean,
+        isAuthenticated: Boolean
+    }
+}
+</script>
+
 <style scoped>
     .navbar {
         background: #d4d9f2;
