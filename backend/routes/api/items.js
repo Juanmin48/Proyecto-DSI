@@ -5,7 +5,7 @@ const items = Parse.Object.extend("Items");
 const item = new items();
 const upload = multer();
 
-
+//Obtener producto con un id especifico
 router.get('/getItem/:itemId', function (req, res) {
    
     query = new Parse.Query(items);
@@ -22,10 +22,11 @@ router.get('/getItem/:itemId', function (req, res) {
     });
 });
 
+//agregar producto
 router.post('/add',upload.single('ItemImg'), function (req, res) {
    
     const fileData = new Parse.File("ItemImg.png", [...req.file.buffer], "image/png");
-    //console.log(fileData);
+
     try{
         fileData.save().then(saved => {
 
@@ -35,10 +36,9 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
             item.set('Price', parseFloat(req.body.price));
             item.set('Stock', parseInt(req.body.stock));
             item.set('category', req.body.category);
-            
+            item.set('UserId',req.body.userid)
             item.save();
 
-            //console.log("El item ha sido añadido con exito");
             res.send("El item ha sido añadido con exito")
         })     
 
@@ -48,11 +48,12 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
     }
   });
 
-  router.get('/GetItems/:category', function (req, res) {
+//buscar producto por categoria y nombre
+  router.get('/getItem/categoryName/:category/:name', function (req, res) {
  
     query = new Parse.Query(items);
-    console.log(req.params.category)
     query.equalTo("category", req.params.category);
+    query.contains('Name', req.params.name);
     query.greaterThan("Stock",0)
     query.find().then(function(item){
         if(item){
@@ -66,7 +67,8 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
     });
 });
 
-router.get('/getAll/all', function (req, res) {
+//obtener una lista de todos los productos
+router.get('/getItem/all', function (req, res) {
     query = new Parse.Query(items);
     query.greaterThan("Stock",0)
     query.find().then(function(item){
@@ -80,5 +82,57 @@ router.get('/getAll/all', function (req, res) {
         res.send("Error: " + error.code + " " + error.message)   
     });
 });
+
+//obtener  lista de los productos de un usuario
+router.get('/getItem/User/:userid', function (req, res) {
+    query = new Parse.Query(items);
+    query.equalTo("UserId", req.params.userid);
+    query.find().then(function(item){
+        if(item){
+            console.log(item)
+           res.send(item)
+        } else {
+           res.send("Nothing found, please try again")
+        }
+    }).catch(function(error){
+        res.send("Error: " + error.code + " " + error.message)   
+    });
+});
+
+//actualizar precio y stock de un item
+router.put('/update', function (req, res) {
+    query = new Parse.Query(items);
+
+    query.equalTo("objectId", req.body.itemid);
+    query.get(req.body.itemid).then((itemObj) => {
+        itemObj.set('Price', parseFloat(req.body.price));
+        itemObj.set('Stock', parseInt(req.body.stock));
+
+        itemObj.save(null, {
+            useMasterKey: true
+        }).then((response) => {
+            console.log('Updated item', response);
+            res.send("item actualizado")
+        }).catch((error) => {
+            console.error('Error while updating user', error);
+            res.send("Error")
+        });
+    });
+});
+
+//Eliminar un item
+router.delete('/delete', function (req, res) {
+    query = new Parse.Query(items);
+
+    query.equalTo("objectId", req.body.itemid);
+    query.get(req.body.itemid).then((itemObj) => {
+        itemObj.destroy().then(function(response) {
+            res.send("Item eliminado con exito")
+          }).catch(function(response, error) {
+            res.send("Error:" +error)
+          });
+    });
+});
+
 
 module.exports = router;
