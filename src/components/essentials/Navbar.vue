@@ -2,14 +2,15 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             
-                    <router-link to="/" class="navbar-brand"><img src="@/media/logo.png" alt="logo" id="logo">
+                <router-link to="/" class="navbar-brand" v-on:click.native="notLog">
+                    <img src="@/media/logo.png" alt="logo" id="logo">
                 </router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" style="z-index: 1030;" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" v-if="!isLogging" style="z-index: 1030;" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <form id="form" class="form-inline mr-auto">
@@ -32,7 +33,7 @@
                     </ul>
                     <ul class="navbar-nav">
 
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="!isAuthenticated">
                             <router-link to="/login" id="is" class="nav-link btn btn-dark mx-auto">Iniciar Sesión
                             </router-link>
                         </li>
@@ -50,6 +51,21 @@
            
     </nav>
 </template>
+
+<script>
+export default {
+    props: {
+        isAuthenticated: Boolean,
+        isLogging      : Boolean
+    }, 
+    methods: {
+        notLog() {
+            this.$store.dispatch("NOT_LOGGING")
+        }
+    }
+}
+</script>
+
 <style scoped>
     .navbar {
         background: rgb(209,188,255);
