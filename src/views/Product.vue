@@ -3,7 +3,9 @@
             <div class="col-12 mx-auto datosP">
                 <h3 class="title">Nombre producto</h3>
                 <hr><br>
-                <img src="@/media/logo.png" class="imagenP" alt="Img-Product">
+                <div class="imagenP mx-auto">
+                    <img src="@/media/logo.png" alt="Img-Product">
+                </div>
                 <br>
                 <h1>Precio</h1>
                 <br><br>
@@ -42,7 +44,12 @@
         width: 100%;
     }
     .imagenP{
-        height: 86px;
+        height: 220px;
+        width: 250px;
+    }
+    .imagenP img{
+        height: 100%;
+        width: 100%;
         margin-bottom: 30px;
     }
     .datosP{
@@ -65,19 +72,74 @@
         left: -5%;
         width: 30%;
     }
-    @media (min-width: 630px){
+    @media (min-width: 440px){
+        .imagenP{
+            height: 250px;
+            width: 280px;
+        }
+    }
+    @media (min-width: 480px){
+        .imagenP{
+            height: 280px;
+            width: 310px;
+        }
+    }
+    @media (min-width: 520px){
+        .imagenP{
+            height: 310px;
+            width: 340px;
+        }
+    }
+    @media (min-width: 560px){
+        .imagenP{
+            height: 340px;
+            width: 370px;
+        }
+    }
+    @media (min-width: 600px){
+        .imagenP{
+            height: 370px;
+            width: 400px;
+        }
+    }
+    @media (min-width: 840px){
         .datosP{
             padding-left: 40%;
         }
         .imagenP{
             position: absolute;
-            height: 86px;
-            margin-top: 30px;
-            left: 12%;
+            height: 250px;
+            width: 280px;
+            margin-top: -25px;
+            left: 5%;
             padding-left: 0px;
         }
         .cant {
             left: -3%;
+        }
+    }
+     @media (min-width: 960px){
+        .imagenP{
+            height: 280px;
+            width: 310px;
+        }
+    }
+    @media (min-width: 1080px){
+        .imagenP{
+            height: 310px;
+            width: 340px;
+        }
+    }
+    @media (min-width: 1200px){
+        .imagenP{
+            height: 340px;
+            width: 370px;
+        }
+    }
+    @media (min-width: 1320px){
+        .imagenP{
+            height: 370px;
+            width: 400px;
         }
     }
 </style>
