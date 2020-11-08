@@ -7,7 +7,7 @@ const upload = multer();
 
 //Obtener producto con un id especifico
 router.get('/getItem/:itemId', function (req, res) {
-   
+    
     query = new Parse.Query(items);
     query.equalTo("objectId", req.params.itemId);
     query.first().then(function(item){
@@ -24,7 +24,7 @@ router.get('/getItem/:itemId', function (req, res) {
 
 //agregar producto
 router.post('/add',upload.single('ItemImg'), function (req, res) {
-   
+    const item = new items();
     const fileData = new Parse.File("ItemImg.png", [...req.file.buffer], "image/png");
 
     try{
@@ -36,10 +36,21 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
             item.set('Price', parseFloat(req.body.price));
             item.set('Stock', parseInt(req.body.stock));
             item.set('category', req.body.category);
-            item.set('UserId',req.body.userid)
-            item.save();
+            item.set('UserId', req.body.userid);
+            item.save().then(
+                (result) => {
+                  if (typeof document !== 'undefined') document.write(`Items created: ${JSON.stringify(result)}`);
+                  console.log('Items created', result);
+                  res.send('Items created'+ result)
+                },
+                (error) => {
+                  if (typeof document !== 'undefined') document.write(`Error while creating Items: ${JSON.stringify(error)}`);
+                  console.error('Error while creating Items: ', error);
+                  res.send('Error while creating Items: ', error)
+                }
+              );
 
-            res.send("El item ha sido añadido con exito")
+            
         })     
 
     }catch(error){
@@ -50,7 +61,7 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
 
 //buscar producto por categoria y nombre
   router.get('/getItem/categoryName/:category/:name', function (req, res) {
- 
+    
     query = new Parse.Query(items);
     query.equalTo("category", req.params.category);
     query.contains('Name', req.params.name);
@@ -68,14 +79,14 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
 });
 
 //obtener una lista de todos los productos
-router.get('/getItem/all', function (req, res) {
+router.get('/getItems', function (req, res) {
     query = new Parse.Query(items);
-    query.greaterThan("Stock",0)
+    //query.greaterThan("Stock",0)
     query.find().then(function(item){
         if(item){
-            console.log(item)
            res.send(item)
         } else {
+            console.log("HOLLAAA")
            res.send("Nothing found, please try again")
         }
     }).catch(function(error){
@@ -132,6 +143,41 @@ router.delete('/delete', function (req, res) {
             res.send("Error:" +error)
           });
     });
+});
+
+//obtener 4 productos random para el home
+router.get('/getItems/random', function (req, res) {
+    var sw;
+    var nums=[];
+    var products=[];
+    query = new Parse.Query(items);
+    query.greaterThan("Stock",0)
+    query.find().then(function(item){
+        if(item){
+            if(item.length<5){
+                res.send(item)
+            }else{
+                for (let i = 0; i < 4; i++) {
+                   sw=0;
+                   while(sw==0){
+                     var num = Math.floor(Math.random() * (item.length-1 + 1));
+                     if(!nums.includes(num)){
+                         nums.push(num)
+                         products.push(item[num])
+                         sw=1;
+                     }
+                   }
+                }
+                res.send(products)
+            }
+
+        } else {
+           res.send("Nothing found, please try again")
+        }
+    }).catch(function(error){
+        res.send("Error: " + error.code + " " + error.message)   
+    });
+    
 });
 
 
