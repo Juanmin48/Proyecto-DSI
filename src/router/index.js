@@ -7,6 +7,7 @@ import Register from '../views/User/Register.vue'
 import Product from '../views/Product.vue'
 import Sell from '../views/Sell.vue'
 import User from '../views/User/User.vue'
+import ContactUs from '../views/ContactUs.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User
+  },
+  {
+    path: '/contact-us',
+    name: 'ContacUs',
+    component: ContactUs
   }
 ]
 
