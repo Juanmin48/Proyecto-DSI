@@ -8,8 +8,7 @@ router.post('/login', function (req, res) {
     .logIn(req.body.email, req.body.password).then(function (user) {
       res.send(user)
     }).catch(function (error) {
-      console.log("Error: " + error.code + " " + error.message);
-      res.send()
+      res.send("Error: " + error.code + " " + error.message)
     });
 });
 
