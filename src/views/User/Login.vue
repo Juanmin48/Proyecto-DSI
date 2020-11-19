@@ -50,7 +50,11 @@ export default {
         login() {
             if(!this.email || this.email.toString().trim() === "" ||
               !this.password || this.password.toString().trim() === "") {
-                  alert('Asegurese de rellenar todos los campos')
+                this.$message({
+                    duration: 3000,
+                    message : "Asegúrate de rellenar todos los campos.",
+                    type    : "error"
+                })
             } else {
                 Axios.post('http://localhost:5000/api/users/login', {
                     email: this.email,
@@ -59,6 +63,11 @@ export default {
                     var user = response.data
                     this.email = ""
                     this.password = ""
+                    this.$message({
+                        duration: 5000,
+                        message : "Inicio sesión correctamente",
+                        type    : "success"
+                    })
                     this.$store.dispatch("LOG_IN", user)
                     this.$store.dispatch("NOT_LOGGING")
                     this.$router.replace({name: 'Home'})

@@ -37,20 +37,25 @@
                             <router-link to="/login" id="is" class="nav-link btn btn-dark mx-auto">Iniciar Sesión
                             </router-link>
                         </li>
-                        <li class="nav-item" v-else>
-                            <p> {{ user.name }}</p>
-                            <a class="nav-link btn btn-dark mx-auto" href="" @click="logOut">Cerrar sesión</a>
+                        <li class="nav-item dropdown" v-else>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{user.name}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <router-link to=""></router-link>
+                                <a class="dropdown-item" href="" @click="logOut">Cerrar sesión</a>
+                            </div>
                         </li>
                         <!-- <li class="nav-item">
                             <router-link to="/SignIn" class="nav-link">Sign In</router-link>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="modal" data-target="#cartModal">
+                            <a class="nav-link" data-toggle="modal" data-target="#cartModal" v-if="isAuthenticated">
                                 <i class="fas fa-shopping-cart" style='font-size:27px' />
                             </a>
-                            <!-- <router-link to="/kart" class="nav-link"><i class="fas fa-shopping-cart"
+                            <router-link to="/login" class="nav-link" v-else><i class="fas fa-shopping-cart"
                                     style='font-size:27px' />
-                            </router-link> -->
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -86,10 +91,14 @@
                         </td>
                         <td>{{item.Name}}</td>
                         <td>{{item.Price | currency }}</td>
-                        <td class="qty">
-                            <button>-</button>
-                            <input type="text" class="form-control" value="2">
-                            <button>+</button>
+                        <td class="items_quantity">
+                                <input type="number"
+                                name="quantity"
+                                id="quantity"
+                                min="1"
+                                max="9999"
+                                :value="item.quantity + 1"
+                                disabled>
                         </td>
                         <td>{{ (item.Price * item.quantity) | currency }}</td>
                         <td>
@@ -101,7 +110,7 @@
                     </tbody>
                     </table> 
                     <div class="d-flex justify-content-end">
-                    <h5>Total: <span class="price text-success">89$</span></h5>
+                    <h5>Total: <span class="price text-success">{{total}}</span></h5>
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-between">
@@ -115,6 +124,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 export default {
     props: {
         isAuthenticated: Boolean,
@@ -132,11 +142,22 @@ export default {
         }
     },
     computed: {
+        ...mapState([
+            "cart"
+        ]),
         user() {
             return this.$store.state.user
         },
         items() {
             return this.$store.state.cart
+        },
+        total() {
+            var total = 0
+            for (let i = 0; i < this.cart.length; i++) {
+                var item = this.cart[i];
+                total += item.Price * item.quantity
+            }
+            return total
         }
     },
 }

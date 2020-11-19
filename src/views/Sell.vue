@@ -21,7 +21,7 @@
                 </div>
                 <!-- Categoria -->
                 <div class="form-group">
-                    <select class="form-control" style="color:gray;" id="select-categories">
+                    <select class="form-control" style="color:gray;" id="select-categories" v-model="Category">
                         <option selected>Categoria</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -35,7 +35,7 @@
                 </div>
                 <!-- Description -->
                 <div class="form-group">
-                    <textarea class="form-control" name="Description" id="Description" cols="63" rows="10" placeholder="Descripción"></textarea>
+                    <textarea class="form-control" name="Description" id="Description" cols="63" rows="10" placeholder="Descripción" v-model="Description"></textarea>
                 </div>
                 <!-- Quantity -->
                 <div class="form-group">
@@ -53,9 +53,8 @@ export default {
         ProductName         : "",
         Price               : "",
         Quantity            : "",
-        password            : "",
-        email               : "",
-        passwordConfirmation: ""
+        Category: "",
+        Description: ""
       }
     },
     methods: {

@@ -17,6 +17,10 @@ Vue.use(VueCurrencyFilter, {
   symbolPosition    : "front"
 })
 
+import { Message } from "element-ui"
+import "element-ui/lib/theme-chalk/index.css"
+Vue.prototype.$message = Message
+
 new Vue({
   router,
   store,

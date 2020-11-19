@@ -70,8 +70,15 @@ export default {
             this.$router.push({name: 'Login'})
         },
         addToCart() {
-            this.product.quantity = this.quantity
+            let product = this.product
+            product.quantity = this.quantity
             this.$store.dispatch("ADD_TO_CART", this.product)
+            this.$message({
+                    duration: 3000,
+                    message : "Producto agregado al carrito",
+                    type    : "success"
+                })
+            this.$router.replace({name: 'Home'})
         }
     },
     created() {
