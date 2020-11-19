@@ -4,10 +4,10 @@
         <div class="container mx-auto">
             <div class="row mx-auto">
                 <div class="col-3">
-                    <a to="/" class="nav-link" data-toggle="modal" data-target="#EditDir"><i class="fas fa-map-marker-alt"/><span class="opt"> Dirección de envío</span></a>
+                    <a class="nav-link" data-toggle="modal" data-target="#EditDir"><i class="fas fa-map-marker-alt"/><span class="opt">Dirección de envío</span></a>
                 </div>
                 <div class="col-3">
-                    <router-link to="/" class="nav-link"><i class="fas fa-star"/><span class="opt"> Ofertas</span></router-link>
+                    <router-link to="/sales" class="nav-link"><i class="fas fa-star"/><span class="opt"> Ofertas</span></router-link>
                 </div>
                 <div class="col-3">
                     <router-link to="/contact-us" class="nav-link"><i class="fas fa-info-circle"/><span class="opt"> Servicio al cliente</span></router-link>
@@ -52,6 +52,11 @@ export default {
     props: {
         isLogging: Boolean,
         isAuthenticated: Boolean
+    },
+    data() {
+        return {
+            address: ""
+        }
     }
 }
 </script>

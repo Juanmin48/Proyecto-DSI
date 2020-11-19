@@ -8,6 +8,8 @@ import Product from '../views/Product.vue'
 import Sell from '../views/Sell.vue'
 import Store from '../store/index.js'
 import ProductList from '../components/Products/ProductList.vue'
+import ProductListUser from '../components/Products/ProductListUser.vue'
+import Sales from '../components/Products/Sales.vue'
 import User from '../views/User/User.vue'
 import ContactUs from '../views/ContactUs.vue'
 
@@ -68,6 +70,16 @@ const routes = [
     path: '/contact-us',
     name: 'ContacUs',
     component: ContactUs
+  },
+  {
+    path: '/product-list-user',
+    name: 'ProductListUser',
+    component: ProductListUser
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    component: Sales
   }
 ]
 

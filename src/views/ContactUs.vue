@@ -26,7 +26,7 @@
                 </div>
                 <!-- Message -->
                 <div class="form-group">
-                    <textarea class="form-control" name="Message" id="Message" cols="63" rows="10" placeholder="Mensaje"></textarea>
+                    <textarea class="form-control" name="Message" id="Message" cols="63" rows="10" placeholder="Mensaje" v-model="Message"></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark w-100">Aceptar</button>
             </div>
@@ -37,11 +37,11 @@
 export default {
     data() {
       return {
-        FullName            : "",
-        Email               : "",
-        Telephone           : "",
-        Subject             : "",
-        Message             : ""
+        Name     : "",
+        Email    : "",
+        Telephone: "",
+        Subject  : "",
+        Message  : ""
       }
     },
     methods: {

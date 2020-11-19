@@ -42,7 +42,7 @@
                             {{user.name}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <router-link to=""></router-link>
+                                <router-link class="dropdown-item" to="/user">Ver perfil</router-link>
                                 <a class="dropdown-item" href="" @click="logOut">Cerrar sesión</a>
                             </div>
                         </li>

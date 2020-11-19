@@ -42,7 +42,7 @@
             <br>
             <div class="row">
                 <div class="col-10 mx-auto">
-                    <button type="submit" class="btn btn-dark w-100">Ver productos en venta</button>
+                    <button type="submit" class="btn btn-dark w-100" v-on:click="goToProducts">Ver productos en venta</button>
                 </div>
             </div>
         </div>
@@ -92,6 +92,26 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            address: "",
+            phone: "",
+            email: "",
+            password: "",
+            passwordConfirmation: "",
+
+        }
+    },
+    methods: {
+        goToProducts() {
+            this.$router.push({name: "ProductListUser"})
+        }
+    },
+}
+</script>
 
 <style scoped>
     .container-fluid {
