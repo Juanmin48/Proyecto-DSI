@@ -8,6 +8,8 @@ import Product from '../views/Product.vue'
 import Sell from '../views/Sell.vue'
 import Store from '../store/index.js'
 import ProductList from '../components/Products/ProductList.vue'
+import User from '../views/User/User.vue'
+import ContactUs from '../views/ContactUs.vue'
 
 Vue.use(VueRouter)
 
@@ -56,6 +58,16 @@ const routes = [
     path: '/product-list',
     name: 'ProductList',
     component: ProductList,
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
+    path: '/contact-us',
+    name: 'ContacUs',
+    component: ContactUs
   }
 ]
 

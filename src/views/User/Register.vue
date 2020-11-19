@@ -1,13 +1,13 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto">
+            <div class="col-xs-12 col-md-9 col-lg-6 mx-auto">
                 <h3 class="title">Registrar cuenta</h3>
                 <hr>
             </div>
         </div>
         <form @submit.prevent="signUp" class="row">
-            <div class="col-5 pt-3 pb-5 mx-auto">
+            <div class="col-xs-11 col-md-8 col-lg-5 pt-3 pb-5 mx-auto">
 
                 <div class="form-group">
                     <input type="text" name="username" id="username" class="form-control" v-model="username" placeholder="Nombre de usuario">
