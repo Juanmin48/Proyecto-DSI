@@ -33,11 +33,11 @@
                         <!-- Dirección -->
                         <div class="form-group">
                             <input type="text" name="address" id="address" class="form-control" v-model="address"
-                                placeholder="Dirección">
+                                :placeholder="this.$store.state.user.address" >
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-between">
-                        <button type="button" class="btn btn-dark">Aceptar</button>
+                        <button type="button" @click.prevent="updateAddress" class="btn btn-dark">Aceptar</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     props: {
         isLogging: Boolean,
@@ -55,9 +56,22 @@ export default {
     },
     data() {
         return {
-            address: ""
+            address: this.$store.state.user.address
         }
-    }
+    },methods: {
+        updateAddress() {
+                     Axios.put('http://localhost:5000/api/users/update', {
+                         address: this.address,
+                         cell: this.$store.state.user.telephone,
+                         password: this.$store.state.user.password,
+                         userid: this.$store.state.user.objectId
+                     }).then(() => {
+                            alert('Direccion modificada')
+                     }).catch((error) => {
+                            alert('Error al modificar la dirección', error.toString())
+                     }) 
+        } 
+    },
 }
 </script>
 

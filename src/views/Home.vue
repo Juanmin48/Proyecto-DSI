@@ -31,7 +31,6 @@ export default {
             Axios.get(`http://localhost:5000/api/items/getItems/random`)
             .then((response) => {
                 this.items = response.data
-                console.log('HOLA')
             })
             .catch((error) => {
                 console.log(error)

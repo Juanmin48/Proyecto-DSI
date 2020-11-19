@@ -6,7 +6,7 @@
                 <hr>
             </div>
         </div>
-        <form @subtmi-prevent="insertP" class="row">
+        <form @submit-prevent="insertP" class="row">
             <div class="col-xs-11 col-md-8 col-lg-5 pt-3 pb-5 mx-auto">
                 <!-- Product name -->
                 <div class="form-group">
@@ -57,9 +57,10 @@ export default {
         Description: ""
       }
     },
+   
     methods: {
         insertP() {
-            
+           
         }
     },
 }

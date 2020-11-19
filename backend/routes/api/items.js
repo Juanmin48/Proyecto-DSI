@@ -86,7 +86,6 @@ router.get('/getItems', function (req, res) {
         if(item){
            res.send(item)
         } else {
-            console.log("HOLLAAA")
            res.send("Nothing found, please try again")
         }
     }).catch(function(error){
