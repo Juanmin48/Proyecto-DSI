@@ -22,7 +22,7 @@ router.get('/getItem/:itemId', function (req, res) {
     });
 });
 
-//agregar producto
+//Agregar producto
 router.post('/add',upload.single('ItemImg'), function (req, res) {
     const item = new items();
     const fileData = new Parse.File("ItemImg.png", [...req.file.buffer], "image/png");
@@ -59,7 +59,7 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
     }
   });
 
-//buscar producto por categoria y nombre
+//Buscar producto por categoria y nombre
   router.get('/getItem/categoryName/:category/:name', function (req, res) {
     
     query = new Parse.Query(items);
@@ -78,7 +78,7 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
     });
 });
 
-//obtener una lista de todos los productos
+//Obtener una lista de todos los productos
 router.get('/getItems', function (req, res) {
     query = new Parse.Query(items);
     //query.greaterThan("Stock",0)
@@ -94,7 +94,7 @@ router.get('/getItems', function (req, res) {
     });
 });
 
-//obtener  lista de los productos de un usuario
+//Obtener  lista de los productos de un usuario
 router.get('/getItem/User/:userid', function (req, res) {
     query = new Parse.Query(items);
     query.equalTo("UserId", req.params.userid);
@@ -110,7 +110,7 @@ router.get('/getItem/User/:userid', function (req, res) {
     });
 });
 
-//actualizar precio y stock de un item
+//Actualizar precio y stock de un item
 router.put('/update', function (req, res) {
     query = new Parse.Query(items);
 
@@ -145,7 +145,7 @@ router.delete('/delete', function (req, res) {
     });
 });
 
-//obtener 4 productos random para el home
+//Obtener 4 productos random para el home
 router.get('/getItems/random', function (req, res) {
     var sw;
     var nums=[];
