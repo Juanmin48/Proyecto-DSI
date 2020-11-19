@@ -43,7 +43,7 @@ body{
 }
 
 #content {
-  padding: 120px 0;
+  padding: 120px 0 20px 0;
   margin-top: 0px;
 }
 #nav a {

@@ -1,13 +1,13 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto">
+            <div class="col-xs-12 col-md-9 col-lg-6 mx-auto">
                 <h3 class="title">Ingresar un producto</h3>
                 <hr>
             </div>
         </div>
         <form @subtmi-prevent="insertP" class="row">
-            <div class="col-5 pt-3 pb-5 mx-auto">
+            <div class="col-xs-11 col-md-8 col-lg-5 pt-3 pb-5 mx-auto">
                 <!-- Product name -->
                 <div class="form-group">
                     <input type="text" name="ProductName" id="ProductName" class="form-control" v-model="ProductName" placeholder="Nombre de Producto">
@@ -15,13 +15,13 @@
                 <!-- Image -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="Image" lang="es">
+                        <input type="file" class="custom-file-input" style="display:none;" id="Image">
                         <label class="custom-file-label" for="Image" style="text-align:left; color:gray;">Seleccionar Imagen</label>
                     </div>
                 </div>
                 <!-- Categoria -->
                 <div class="form-group">
-                    <select class="form-control" style="color:gray;" id="select-categories">
+                    <select class="form-control" style="color:gray;" id="select-categories" v-model="Category">
                         <option selected>Categoria</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -35,7 +35,7 @@
                 </div>
                 <!-- Description -->
                 <div class="form-group">
-                    <textarea class="form-control" name="Description" id="Description" cols="63" rows="10" placeholder="Descripción"></textarea>
+                    <textarea class="form-control" name="Description" id="Description" cols="63" rows="10" placeholder="Descripción" v-model="Description"></textarea>
                 </div>
                 <!-- Quantity -->
                 <div class="form-group">
@@ -50,12 +50,11 @@
 export default {
     data() {
       return {
-        ProductName                : "",
-        Price            : "",
-        Quantity               : "",
-        password            : "",
-        email               : "",
-        passwordConfirmation: ""
+        ProductName         : "",
+        Price               : "",
+        Quantity            : "",
+        Category: "",
+        Description: ""
       }
     },
     methods: {

@@ -7,7 +7,7 @@
             <h2 class="Product_Name">{{ product.name }}</h2>
         </div>
         <div class="col-12">
-            <div class="Product_Description">{{ product.description }}</div>
+            <div class="Product_Description" v-if="!isList">{{ product.description }}</div>
         </div>
         <div class="col-12">
             <h1 class="Product_Description">{{ product.price | currency }}</h1>
@@ -18,11 +18,12 @@
 <script>
 export default {
     props: {
-        product: Object
+        product: Object,
+        isList: Boolean
     },
     methods: {
         metodoPrueba() {
-            console.log('Click en producto')
+            this.$router.push(`/product/${this.product.id}`)
         }
     }
 }
