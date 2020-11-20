@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     props: {
         product: Object,
@@ -58,7 +59,8 @@ export default {
     data() {
         return {
             stock: "",
-            price: ""
+            price: "",
+            itemid: this.product.objectId
         }
     },
     methods: {
@@ -67,11 +69,25 @@ export default {
                 this.$router.push(`/product/${this.product.objectId}`)
             }
         }, 
-        uptdateItem() {
-
+        updateItem() {
+                    Axios.put(`http://localhost:5000/api/items/update/${this.product.objectId}`, {
+                            stock: this.stock,
+                            price: this.price
+                            
+                        }).then(() => {
+                            alert('Producto modificado con exito')
+                        }).catch((error) => {
+                            alert('Error al modificar el producto', error.toString())
+                        })
         },
         deleteItem() {
-
+                     Axios.delete(`http://localhost:5000/api/items/delete/${this.product.objectId}`, {
+                         
+                        }).then(() => {
+                            alert('Prodcuto eliminado con exito')
+                        }).catch((error) => {
+                            alert('Error al eliminar el producto', error.toString())
+                        })
         }
     }
 }

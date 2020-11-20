@@ -59,11 +59,10 @@ router.post('/add',upload.single('ItemImg'), function (req, res) {
     }
   });
 
-//Buscar producto por categoria y nombre
-  router.get('/getItem/categoryName/:category/:name', function (req, res) {
+//Buscar producto por nombre
+  router.get('/getItem/Name/:name', function (req, res) {
     
     query = new Parse.Query(items);
-    query.equalTo("category", req.params.category);
     query.contains('Name', req.params.name);
     query.greaterThan("Stock",0)
     query.find().then(function(item){
@@ -110,11 +109,12 @@ router.get('/getItem/User/:userid', function (req, res) {
 });
 
 //Actualizar precio y stock de un item
-router.put('/update', function (req, res) {
+router.put('/update/:itemid', function (req, res) {
     query = new Parse.Query(items);
 
-    query.equalTo("objectId", req.body.itemid);
-    query.get(req.body.itemid).then((itemObj) => {
+    query.equalTo("objectId", req.params.itemid);
+    console.log(req.params.itemid)
+    query.get(req.params.itemid).then((itemObj) => {
         itemObj.set('Price', parseFloat(req.body.price));
         itemObj.set('Stock', parseInt(req.body.stock));
 
@@ -131,11 +131,12 @@ router.put('/update', function (req, res) {
 });
 
 //Eliminar un item
-router.delete('/delete', function (req, res) {
+router.delete('/delete/:itemid', function (req, res) {
     query = new Parse.Query(items);
-
-    query.equalTo("objectId", req.body.itemid);
-    query.get(req.body.itemid).then((itemObj) => {
+    
+    query.equalTo("objectId", req.params.itemid);
+    console.log(req.params.itemid)
+    query.get(req.params.itemid).then((itemObj) => {
         itemObj.destroy().then(function(response) {
             res.send("Item eliminado con exito")
           }).catch(function(response, error) {

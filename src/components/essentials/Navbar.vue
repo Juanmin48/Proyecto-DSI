@@ -24,7 +24,7 @@
                                     <input type="text" class="form-control" id="search-input" placeholder="Buscar"
                                         aria-label="Recipient's username">
                                     <!-- <div class="input-group-append"> -->
-                                    <button class="btn form-control btn-light" type="button" id="search-btn"><i
+                                   <button class="btn form-control btn-light" type="button" id="search-btn"><i
                                             class="fas fa-search" /></button>
                                     <!-- </div> -->
                                 </div>
@@ -126,6 +126,7 @@
 <script>
 import { mapState } from "vuex"
 export default {
+     
     props: {
         isAuthenticated: Boolean,
         isLogging      : Boolean
@@ -140,6 +141,7 @@ export default {
         remove(item) {
             this.$store.dispatch("REMOVE_FROM_CART", item)
         }
+        
     },
     computed: {
         ...mapState([

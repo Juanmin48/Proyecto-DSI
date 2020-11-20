@@ -57,7 +57,7 @@ const routes = [
     meta: {authRequired: true}
   },
   {
-    path: '/product-list',
+    path: '/product-list/:item',
     name: 'ProductList',
     component: ProductList,
   },
