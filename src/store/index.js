@@ -11,7 +11,15 @@ export default new Vuex.Store({
   },
   
   mutations: {
-    SET_USER : (state, payload) => state.user = payload,
+    SET_USER : (state, payload) => {
+      state.user = payload
+      if(!localStorage.getItem('USER')) {
+        localStorage.setItem('USER', JSON.stringify(payload))
+      } 
+      if(!payload) {
+        localStorage.removeItem('USER')
+      }
+    },
     SET_LOGGING_STATE: (state, payload) => state.logging = payload,
     SET_ITEM_CART: (state, payload) => {
       const { quantity, objectId } = payload
@@ -21,6 +29,7 @@ export default new Vuex.Store({
       } else {
         state.cart[index].quantity = state.cart[index].quantity + quantity
       }
+      localStorage.setItem('CART', JSON.stringify(state.cart))
     },
     REMOVE_ITEM_CART: (state, payload) => {
       const { objectId } = payload
@@ -28,6 +37,7 @@ export default new Vuex.Store({
       if(index > -1) {
         state.cart.splice(index, 1)
       }
+      localStorage.setItem('CART', JSON.stringify(state.cart))
     }
   },
   actions: {
