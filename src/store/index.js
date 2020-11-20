@@ -9,6 +9,7 @@ export default new Vuex.Store({
     logging: null,
     cart: []
   },
+  
   mutations: {
     SET_USER : (state, payload) => state.user = payload,
     SET_LOGGING_STATE: (state, payload) => state.logging = payload,

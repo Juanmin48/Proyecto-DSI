@@ -1,16 +1,16 @@
 <template>
     <div id="card" class="row shadow mx-1 my-2 bg-white rounded" v-on:click="metodoPrueba">
         <div class="col-12">
-            <img src="https://windigitalpc.com/wp-content/uploads/2020/01/LD0005368493_2.jpg" class="img-fluid" alt="asdasd">
+            <img :src="product.image.url" class="img-fluid" alt="asdasd" v-if="product.image">
         </div>
         <div class="col-12">
-            <h2 class="Product_Name">{{ product.name }}</h2>
+            <h2 class="Product_Name">{{ product.Name }}</h2>
         </div>
         <div class="col-12">
-            <div class="Product_Description" v-if="!isList">{{ product.description }}</div>
+            <div class="Product_Description" v-if="!isList">{{ product.Description }}</div>
         </div>
         <div class="col-12">
-            <h1 class="Product_Description">{{ product.price | currency }}</h1>
+            <h1 class="Product_Description">{{ product.Price | currency }}</h1>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         metodoPrueba() {
-            this.$router.push(`/product/${this.product.id}`)
+            this.$router.push(`/product/${this.product.objectId}`)
         }
     }
 }

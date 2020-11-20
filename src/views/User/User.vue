@@ -3,8 +3,8 @@
         <div class="col-xs-12 col-md-5 col-lg-5 max-auto">
             <img src="@/media/User.png" class="imagenU" alt="Img-Product">
             <br>
-            <h3 class="title">Nombre Usuario</h3>
-            <h3 class="title">Apellido Usuario</h3>
+            <h3 class="title">{{this.$store.state.user.name}}</h3>
+            <h3 class="title">{{this.$store.state.user.lastname}}</h3>
             <br>
         </div>
         <div class="col-xs-12 col-md-7 col-lg-7 mx-auto datosU">
@@ -31,10 +31,10 @@
                             <h5 class="label">Usuario:</h5>
                         </div>
                         <div class="col-7" style="text-align:left; margin-bottom:-10px;">
-                            <p class="result">Address here</p>
-                            <p class="result">Telephone here</p>
-                            <p class="result">E-mail here</p>
-                            <p class="result">Username here</p>
+                            <p class="result">{{this.address}}</p>
+                            <p class="result">{{this.phone}}</p>
+                            <p class="result">{{this.email}}</p>
+                            <p class="result">{{this.username}}</p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-between">
-                        <button type="button" class="btn btn-dark">Aceptar</button>
+                        <button @click.prevent="updateUser" type="button" class="btn btn-dark">Aceptar</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -94,12 +94,14 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     data() {
         return {
-            address: "",
-            phone: "",
-            email: "",
+            address: this.$store.state.user.address,
+            phone: this.$store.state.user.telephone,
+            email: this.$store.state.user.email,
+            username: this.$store.state.user.username,
             password: "",
             passwordConfirmation: "",
 
@@ -108,6 +110,23 @@ export default {
     methods: {
         goToProducts() {
             this.$router.push({name: "ProductListUser"})
+        },
+        updateUser() {
+             if (this.password === this.passwordConfirmation) {
+                        Axios.put('http://localhost:5000/api/users/update', {
+                            address: this.address,
+                            cell: this.telephone,
+                            password: this.password,
+                            userid: this.$store.state.user.objectId
+            
+                        }).then(() => {
+                            alert('Usuario modificado')
+                        }).catch((error) => {
+                            alert('Error al modificar el usuario', error.toString())
+                        })
+                    } else {
+                        alert('Las contraseñas deben coincidir')
+                    }
         }
     },
 }
