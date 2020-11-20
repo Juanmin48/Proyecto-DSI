@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 justify-content-center">
-                <h3>Productos que está vendiendo</h3>
+                <h3 v-if="items.length">Productos que está vendiendo</h3>
+                <h3 v-else>Usted aún no está vendiendo ningún producto</h3>
             </div>
             <div class="col-12">
                 <products-grid :isList="true" :userList="true" :products="items" :numCol="'col-lg-4'"/>

@@ -61,16 +61,25 @@ export default {
                     password: this.password
                 }).then((response) => {
                     var user = response.data
-                    this.email = ""
-                    this.password = ""
-                    this.$message({
-                        duration: 5000,
-                        message : "Inicio sesión correctamente",
-                        type    : "success"
-                    })
-                    this.$store.dispatch("LOG_IN", user)
-                    this.$store.dispatch("NOT_LOGGING")
-                    this.$router.replace({name: 'Home'})
+                    console.log(user)
+                    if(user === "Error: 101 Invalid username/password.") {
+                        this.$message({
+                            duration: 5000,
+                            message : "Usuario y contraseña incorrectos",
+                            type    : "error"
+                        })
+                    } else {
+                        this.email = ""
+                        this.password = ""
+                        this.$message({
+                            duration: 5000,
+                            message : "Inicio sesión correctamente",
+                            type    : "success"
+                        })
+                        this.$store.dispatch("LOG_IN", user)
+                        this.$store.dispatch("NOT_LOGGING")
+                        this.$router.replace({name: 'Home'})
+                    }
                 }).catch((error) => console.log(error))
             }
         }

@@ -33,7 +33,7 @@
                         <!-- Dirección -->
                         <div class="form-group">
                             <input type="text" name="address" id="address" class="form-control" v-model="address"
-                                :placeholder="this.$store.state.user.address" >
+                                :placeholder="this.$store.state.user ? this.$store.state.user.address : ''" >
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-between">
@@ -56,7 +56,7 @@ export default {
     },
     data() {
         return {
-            address: this.$store.state.user.address
+            address: null
         }
     },methods: {
         updateAddress() {
@@ -71,6 +71,9 @@ export default {
                             alert('Error al modificar la dirección', error.toString())
                      }) 
         } 
+    }, 
+    created() {
+        this.address = this.$store.state.user ? this.$store.state.user.address :null
     },
 }
 </script>

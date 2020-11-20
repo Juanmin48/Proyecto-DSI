@@ -1,5 +1,5 @@
 <template>
-    <div id="card" class="row shadow mx-1 my-2 bg-white rounded" v-on:click="metodoPrueba">
+    <div id="card" class="row shadow mx-1 my-2 bg-white rounded" @click.prevent="metodoPrueba">
         <div class="col-12">
             <img :src="product.image.url" class="img-fluid" alt="asdasd" v-if="product.image">
         </div>
@@ -12,6 +12,39 @@
         <div class="col-12">
             <h1 class="Product_Description">{{ product.Price | currency }}</h1>
         </div>
+        <div class="col-12" v-if="userList">
+            <a data-toggle="modal" data-target="#Edit" class="btn btn-info">Modificar</a>
+            <button type="button" class="btn btn-danger" @click.prevent="deleteItem">Eliminar</button>
+        </div>
+        <div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" v-if="userList">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- stock -->
+                        <div class="form-group">
+                            <input type="text" name="stockC" id="stockC" class="form-control" v-model="stock"
+                                placeholder="stock">
+                        </div>
+                        <!-- precio -->
+                        <div class="form-group">
+                            <input type="text" name="priceC" id="priceC" class="form-control" v-model="price"
+                                placeholder="price">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-between">
+                        <button @click.prevent="updateItem" type="button" class="btn btn-dark">Aceptar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -19,11 +52,26 @@
 export default {
     props: {
         product: Object,
-        isList: Boolean
+        isList: Boolean,
+        userList: Boolean
+    },
+    data() {
+        return {
+            stock: "",
+            price: ""
+        }
     },
     methods: {
         metodoPrueba() {
-            this.$router.push(`/product/${this.product.objectId}`)
+            if(!this.userList) {
+                this.$router.push(`/product/${this.product.objectId}`)
+            }
+        }, 
+        uptdateItem() {
+
+        },
+        deleteItem() {
+
         }
     }
 }
@@ -31,7 +79,14 @@ export default {
 
 <style scoped>
 
-    #card {overflow:hidden;}
+    #card {
+        overflow:hidden;
+        height: 100%;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
 
     .Product_Name, 
     .Product_Description, 

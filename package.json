@@ -14,6 +14,9 @@
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "element-ui": "^2.14.1",
+    "filepond": "^4.23.1",
+    "filepond-plugin-file-validate-type": "^1.2.5",
+    "filepond-plugin-image-preview": "^4.6.4",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
@@ -22,6 +25,7 @@
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-currency-filter": "^5.2.0",
+    "vue-filepond": "^6.0.3",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },

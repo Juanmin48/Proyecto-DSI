@@ -25,6 +25,11 @@ export default {
       return this.$store.state.logging
     }
   },
+  created() {
+    if(localStorage.getItem('USER')) {
+      this.$store.dispatch("LOG_IN", JSON.parse(localStorage.getItem('USER')))
+    }
+  }
 }
 </script>
 
